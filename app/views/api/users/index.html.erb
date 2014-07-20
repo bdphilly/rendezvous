@@ -1,0 +1,6 @@
+<h1>All the Users</h1>
+
+<% @users.each do |user| %>
+	<%= user.fname %>
+	<%= link_to "Check out this user!", api_user_url(user) %>
+<% end %>
