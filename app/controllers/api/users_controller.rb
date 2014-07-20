@@ -2,12 +2,12 @@ class Api::UsersController < ApplicationController
 
 	def index
 		@users = User.all
-		render :json => @users.to_json(:methods => :avatar_url)
+		render :json => @users.to_json(:methods => [:avatar_url_large, :avatar_url_medium])
 	end
 
 	def show
 		@user = User.find(params[:id])
-		render :json => @user
+		render :json => @user.to_json(:methods => [:avatar_url_large, :avatar_url_medium])
 	end
 
 	def create
