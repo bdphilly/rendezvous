@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+@import url(http://fonts.googleapis.com/css?family=Muli);
+
+body {
+	font-family: 'Muli', sans-serif;
+	text-align: center;
+}
+
+#stream {
+	text-decoration: underline;
+}
+
+.messages {
+
+}

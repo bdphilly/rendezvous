@@ -1,0 +1,46 @@
+<h1>This is Rendezvous, yo!</h1>
+
+<div id="join">
+  <%= link_to "join stream" %>
+</div>
+
+<h2><div id="stream">THE STREAM</div></h2>
+<div class="messages"></div>
+<!-- <div id="new-message">Input your message!</div> -->
+
+<form id="form-message">
+Message: <input type="text" name="FirstName" id="message" value="">
+<input type="submit" value="Submit">
+</form>
+
+<script>(function(){
+ 
+  $('#form-message').submit(function(e) {
+    e.preventDefault();
+    message = $("#message").val();
+    publish(message);
+  });
+
+  var pubnub = PUBNUB.init({
+     publish_key   : 'demo',
+     subscribe_key : 'demo'
+  })
+
+  $('#join').click(function () {
+    pubnub.subscribe({
+      channel : "demo",
+      message : function(message){ 
+        $('.messages').append('<div>' + message + '</div><br>')
+      },
+      connect : publish
+    })    
+  })
+
+  function publish(m) {
+     pubnub.publish({
+         channel : "demo",
+         message : m
+     })
+  }
+
+})();</script>

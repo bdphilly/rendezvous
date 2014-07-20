@@ -1,5 +1,8 @@
 class Api::UsersController < ApplicationController
 
+	def root
+	end
+
 	def index
 		@users = User.all
 		render :json => @users.to_json(:methods => [:avatar_url_large, :avatar_url_medium])
@@ -45,8 +48,6 @@ class Api::UsersController < ApplicationController
 			uupc: params[:uupc],
 			description: params[:description]
 		}
-
-
 	end
 
 end

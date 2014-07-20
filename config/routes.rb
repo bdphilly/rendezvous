@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # root "users#index"
+  root to: "api/users#root"
 
   namespace :api do
     resources :users
