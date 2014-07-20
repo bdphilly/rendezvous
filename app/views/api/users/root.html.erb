@@ -5,8 +5,8 @@
 </div>
 
 <h2><div id="stream">THE STREAM</div></h2>
+<div id="thumb"></div>
 <div class="messages"></div>
-<!-- <div id="new-message">Input your message!</div> -->
 
 <form id="form-message">
 Message: <input type="text" name="FirstName" id="message" value="">
@@ -26,14 +26,30 @@ Message: <input type="text" name="FirstName" id="message" value="">
      subscribe_key : 'demo'
   })
 
-  $('#join').click(function () {
+  $('#join').click(function (e) {
+    e.preventDefault();
+
     pubnub.subscribe({
       channel : "demo",
       message : function(message){ 
         $('.messages').append('<div>' + message + '</div><br>')
       },
       connect : publish
-    })    
+    })  
+
+    $.ajax({
+      type: "GET",
+      url: "./api/users/8",
+      dataType: 'json',
+      success: function (data, status, error) {
+        console.log('success', data);
+        $('#thumb').append('<img src="' + data.avatar_url_medium + '" class="img-circle">');
+      },
+      error: function (data, status, error) {
+        console.log('error', data, status, error);
+      }
+    });
+
   })
 
   function publish(m) {
@@ -42,5 +58,7 @@ Message: <input type="text" name="FirstName" id="message" value="">
          message : m
      })
   }
+
+  $()
 
 })();</script>
